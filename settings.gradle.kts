@@ -1,4 +1,4 @@
-rootProject.name = "kotlin-batch"
+rootProject.name = "auth-example-service"
 
 
 include(
