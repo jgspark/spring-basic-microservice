@@ -11,5 +11,6 @@ tasks.bootJar {
 }
 
 dependencies {
-    implementation("org.springframework.cloud:spring-cloud-starter-zuul:1.4.7.RELEASE")
+    // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-netflix-zuul
+    implementation("org.springframework.cloud:spring-cloud-starter-netflix-zuul:2.2.10.RELEASE")
 }
