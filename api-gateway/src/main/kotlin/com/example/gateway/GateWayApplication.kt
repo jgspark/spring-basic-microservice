@@ -1,4 +1,4 @@
-package com.example.content
+package com.example.gateway
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
