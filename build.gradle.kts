@@ -61,5 +61,14 @@ subprojects {
 
         // db
         implementation("com.h2database:h2")
+
+        // redis
+        implementation("org.springframework.boot:spring-boot-starter-data-redis:3.0.3")
+
+        // security
+        implementation("org.springframework.boot:spring-boot-starter-security:3.0.3")
+
+        // session
+        implementation("org.springframework.session:spring-session:1.3.5.RELEASE")
     }
 }
