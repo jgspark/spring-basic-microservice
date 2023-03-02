@@ -1,8 +1,3 @@
-zuul:
-  routes:
-    # Banner Server EndPoint Add
-    banner:
-      url: http://localhost:9000
-    # Content Server EndPoint Add
-    content:
-      url: http://localhost:7000
+spring:
+  config:
+    import: "optional:configserver:"

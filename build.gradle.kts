@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     java
-    id("org.springframework.boot") version ("3.0.2")
+    id("org.springframework.boot") version ("3.0.3")
     id("io.spring.dependency-management") version ("1.1.0")
     id("org.jetbrains.kotlin.jvm") version ("1.7.22")
     id("org.jetbrains.kotlin.plugin.spring") version ("1.7.22")
@@ -55,20 +55,20 @@ subprojects {
         //web app
         implementation("org.springframework.boot:spring-boot-starter")
         implementation("org.springframework.boot:spring-boot-starter-test")
-        implementation("org.springframework.boot:spring-boot-starter-web")
-        implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-        implementation("org.springframework.boot:spring-boot-starter-jdbc")
 
-        // db
-        implementation("com.h2database:h2")
+        // gateway 는 web dependencies 를 가질 수 없다.
+        //Please set spring.main.web-application-type=reactive or remove spring-boot-starter-web dependency.
+        if (!project.name.contains("gateway")) {
+            implementation("org.springframework.boot:spring-boot-starter-web")
+        }
 
-//        // redis
+
+        // todo : 나중에 추가 예정
+//        implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+//        implementation("org.springframework.boot:spring-boot-starter-jdbc")
+//        implementation("com.h2database:h2")
 //        implementation("org.springframework.boot:spring-boot-starter-data-redis:3.0.3")
-
-        // security
-        implementation("org.springframework.boot:spring-boot-starter-security:3.0.3")
-
-        // session
-        implementation("org.springframework.session:spring-session:1.3.5.RELEASE")
+//        implementation("org.springframework.boot:spring-boot-starter-security:3.0.3")
+//        implementation("org.springframework.session:spring-session:1.3.5.RELEASE")
     }
 }

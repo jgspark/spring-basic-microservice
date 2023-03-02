@@ -1,5 +1,6 @@
 plugins {
     id("org.springframework.boot")
+    id("io.spring.dependency-management")
 }
 
 tasks.jar {
@@ -10,7 +11,17 @@ tasks.bootJar {
     enabled = true
 }
 
+ext {
+    set("springCloudVersion", "Hoxton.SR8")
+}
+
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.cloud:spring-cloud-dependencies:2022.0.1")
+    }
+}
+
 dependencies {
-    // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-netflix-zuul
-    implementation("org.springframework.cloud:spring-cloud-starter-netflix-zuul:2.2.10.RELEASE")
+    implementation("org.springframework.cloud:spring-cloud-starter-config")
+    implementation("org.springframework.cloud:spring-cloud-starter-gateway")
 }
