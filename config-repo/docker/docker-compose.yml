@@ -1,0 +1,50 @@
+version: '3'
+services:
+  product:
+    image: arm64v8/mysql
+    restart: always
+    ports:
+      - "13306:3306"
+    environment:
+      TZ: Asia/Seoul
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: default
+      MYSQL_USER: default
+      MYSQL_PASSWORD: 1234
+    container_name: "product_db"
+    volumes:
+      - ./product/mysql:/var/lib/mysqlysql
+      # init.sql
+      - ./product/sql:/docker-entrypoint-initdb.d
+  review:
+    image: arm64v8/mysql
+    restart: always
+    ports:
+      - "23306:3306"
+    environment:
+      TZ: Asia/Seoul
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: default
+      MYSQL_USER: default
+      MYSQL_PASSWORD: 1234
+    container_name: "review_db"
+    volumes:
+      - ./review/mysql:/var/lib/mysqlysql
+      # init.sql
+      - ./review/sql:/docker-entrypoint-initdb.d
+  recommendation:
+    image: arm64v8/mysql
+    restart: always
+    ports:
+      - "33306:3306"
+    environment:
+      TZ: Asia/Seoul
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: default
+      MYSQL_USER: default
+      MYSQL_PASSWORD: 1234
+    container_name: "recommendation_db"
+    volumes:
+      - ./recommendation/mysql:/var/lib/mysqlysql
+      # init.sql
+      - ./recommendation/sql:/docker-entrypoint-initdb.d
