@@ -1,4 +1,4 @@
-package com.example.content.web
+package com.example.recommendation.web
 
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping

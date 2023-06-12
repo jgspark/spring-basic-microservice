@@ -1,11 +1,11 @@
-package com.example.recommendation
+package com.example.composite
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-open class BannerApplication
+open class ProductCompositeServiceApplication
 
 fun main(args: Array<String>) {
-    runApplication<BannerApplication>(*args)
+    runApplication<ProductCompositeServiceApplication>(*args)
 }

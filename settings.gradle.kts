@@ -1,4 +1,4 @@
-rootProject.name = "auth-example-service"
+rootProject.name = "spring-basic-microservice"
 
 
 include(
@@ -6,5 +6,5 @@ include(
     "product-service",
     "review-service",
     "recommendation-service",
-    "product-composite"
+    "product-composite-service"
 )

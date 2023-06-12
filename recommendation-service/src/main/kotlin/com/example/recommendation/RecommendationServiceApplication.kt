@@ -1,11 +1,11 @@
-package com.example.content
+package com.example.recommendation
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-open class ContentApplication
+open class RecommendationServiceApplication
 
 fun main(args: Array<String>) {
-    runApplication<ContentApplication>(*args)
+    runApplication<RecommendationServiceApplication>(*args)
 }
