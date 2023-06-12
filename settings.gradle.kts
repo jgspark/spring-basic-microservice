@@ -3,7 +3,8 @@ rootProject.name = "auth-example-service"
 
 include(
     "api-gateway",
-    "auth",
-    "content",
-    "banner"
+    "product-service",
+    "review-service",
+    "recommendation-service",
+    "product-composite"
 )

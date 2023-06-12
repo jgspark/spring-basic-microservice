@@ -1,11 +1,11 @@
-package com.example.banner
+package com.example.product
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-open class BannerApplication
+open class AuthApplication
 
 fun main(args: Array<String>) {
-    runApplication<BannerApplication>(*args)
+    runApplication<AuthApplication>(*args)
 }
