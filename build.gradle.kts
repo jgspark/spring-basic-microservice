@@ -69,6 +69,10 @@ subprojects {
         runtimeOnly("com.mysql:mysql-connector-j")
         testImplementation("com.h2database:h2")
 
+        // log add
+        // todo : 나중에 체크
+        testImplementation("com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.9.0")
+
 
         // todo : 나중에 추가 예정
 //        implementation("org.springframework.boot:spring-boot-starter-jdbc")
