@@ -62,11 +62,16 @@ subprojects {
             implementation("org.springframework.boot:spring-boot-starter-web")
         }
 
+        // jps
+        implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+
+        // mysql
+        runtimeOnly("com.mysql:mysql-connector-j")
+        testImplementation("com.h2database:h2")
+
 
         // todo : 나중에 추가 예정
-//        implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 //        implementation("org.springframework.boot:spring-boot-starter-jdbc")
-//        implementation("com.h2database:h2")
 //        implementation("org.springframework.boot:spring-boot-starter-data-redis:3.0.3")
 //        implementation("org.springframework.boot:spring-boot-starter-security:3.0.3")
 //        implementation("org.springframework.session:spring-session:1.3.5.RELEASE")
