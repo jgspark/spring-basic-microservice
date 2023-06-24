@@ -8,11 +8,18 @@ data class ReviewWriteModel(
     val content: String
 ) {
 
-    fun toEntity() = Review(
-        this.productId,
-        this.author,
-        this.content
-    )
+    fun toEntity(): Review =
+        Review(0L, productId, author, content, null, null)
+}
+
+data class ReviewMergeModel(
+    val id: Long,
+    val author: String,
+    val content: String
+) {
+
+    fun toEntity(): Review =
+        Review(id, 0L, author, content, null, null)
 }
 
 data class ReviewWriteRequest(
@@ -22,6 +29,13 @@ data class ReviewWriteRequest(
 ) {
 
     fun toModel() = ReviewWriteModel(productId, author, content)
+}
+
+data class ReviewMergeRequest(
+    val author: String,
+    val content: String
+) {
+    fun toModel(id: Long) = ReviewMergeModel(id, author, content)
 }
 
 

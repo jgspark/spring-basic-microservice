@@ -5,6 +5,7 @@ import com.example.review.app.exception.ExceptionMessage
 import com.example.review.domain.Review
 import com.example.review.domain.ReviewReader
 import com.example.review.domain.ReviewWriter
+import com.example.review.dto.ReviewMergeModel
 import com.example.review.dto.ReviewSearchCommand
 import com.example.review.dto.ReviewWriteModel
 import org.springframework.stereotype.Service
@@ -13,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional
 interface ReviewService {
 
     fun writeOne(model: ReviewWriteModel): Long
+
+    fun mergeOne(model: ReviewMergeModel): Review
 
     fun getOne(id: Long?): Review
 
@@ -33,6 +36,9 @@ open class ReviewServiceImpl(
         }
         this
     }
+
+    @Transactional
+    override fun mergeOne(model: ReviewMergeModel): Review = reviewWriter.update(model.toEntity())
 
     override fun getOne(id: Long?): Review =
         checkNotNull(id) {

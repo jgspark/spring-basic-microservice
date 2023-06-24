@@ -10,11 +10,13 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.PrePersist
 import jakarta.persistence.PreUpdate
+import org.hibernate.annotations.DynamicUpdate
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDateTime
 
 @Entity
+@DynamicUpdate
 data class Review(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,21 +25,12 @@ data class Review(
     @Column(nullable = false)
     val productId: Long,
     @Column(nullable = false)
-    val author: String,
+    var author: String,
     @Column(nullable = false)
-    val content: String,
+    var content: String,
     var createdAt: LocalDateTime?,
     var updatedAt: LocalDateTime?,
 ) {
-
-    constructor(productId: Long, author: String, content: String) : this(
-        id = 0L,
-        productId = productId,
-        author = author,
-        content = content,
-        createdAt = null,
-        updatedAt = null
-    )
 
     constructor() : this(
         0L,
@@ -73,11 +66,22 @@ data class Review(
 
 @Component
 open class ReviewWriter(
-    private val reviewRepository: ReviewRepository
+    private val reviewRepository: ReviewRepository,
 ) {
 
     @Transactional
     open fun write(entity: Review): Review = reviewRepository.save(entity)
+
+    @Transactional
+    open fun update(entity: Review): Review =
+        reviewRepository.findById(entity.id)
+            .orElseThrow {
+                throw NotFoundDataException(entity.id, ExceptionMessage.REVIEW_SELECT_NOT_FOUND)
+            }.run {
+                this.content = entity.content
+                this.author = entity.author
+                this
+            }
 }
 
 
