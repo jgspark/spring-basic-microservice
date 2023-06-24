@@ -30,7 +30,7 @@ open class ReviewRepositoryTest {
 
             //given
 
-            val mock = Review(0L, "작성자", "리뷰를 남긴다..")
+            val mock = Review(0L, 0L, "작성자", "리뷰를 남긴다..", null, null)
 
             //when
 
@@ -48,7 +48,7 @@ open class ReviewRepositoryTest {
         open fun `정상적으로 동작한다`() {
 
             //given
-            val mock = Review(1L, "작성자", "리뷰를 남긴다..")
+            val mock = Review(0L, 1L, "작성자", "리뷰를 남긴다..", null, null)
 
             //when
             val entity = reviewRepository.save(mock)

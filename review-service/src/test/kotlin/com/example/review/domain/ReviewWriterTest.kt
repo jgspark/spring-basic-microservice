@@ -25,7 +25,7 @@ open class ReviewWriterTest {
     open fun `리뷰 저장 테스트`() {
 
         //given
-        val review = Review(1L, "구매자1", "아주 좋은 상품입니다")
+        val review = Review(0L, 1L, "구매자1", "아주 좋은 상품입니다", null, null)
 
         //when
         val entity = reviewWriter.write(review)
