@@ -26,8 +26,8 @@ data class Review(
     val author: String,
     @Column(nullable = false)
     val content: String,
-    val createdAt: LocalDateTime?,
-    val updatedAt: LocalDateTime?,
+    var createdAt: LocalDateTime?,
+    var updatedAt: LocalDateTime?,
 ) {
 
     constructor(productId: Long, author: String, content: String) : this(
@@ -51,16 +51,23 @@ data class Review(
     // 엔티티의 기본 스팩 정의
     @PrePersist
     fun prePersist() {
+
         check(productId != 0L) {
             ExceptionMessage.REVIEW_SAVE_PRODUCT_ID
         }
+
+        this.createdAt = LocalDateTime.now()
+        this.updatedAt = LocalDateTime.now()
     }
 
     @PreUpdate
     fun preUpdate() {
+
         check(productId != 0L) {
             ExceptionMessage.REVIEW_SAVE_PRODUCT_ID
         }
+
+        this.updatedAt = LocalDateTime.now()
     }
 }
 
@@ -70,7 +77,7 @@ open class ReviewWriter(
 ) {
 
     @Transactional
-    open fun write(entity: Review) = reviewRepository.save(entity)
+    open fun write(entity: Review): Review = reviewRepository.save(entity)
 }
 
 
