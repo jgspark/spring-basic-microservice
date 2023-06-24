@@ -3,13 +3,12 @@ plugins {
 }
 
 tasks.jar {
-    enabled = false
-}
-
-tasks.bootJar {
     enabled = true
 }
 
+tasks.bootJar {
+    enabled = false
+}
+
 dependencies {
-    implementation(project(":util"))
 }
