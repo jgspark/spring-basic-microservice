@@ -11,7 +11,5 @@ object ExceptionMessage {
 
     const val ID_NOT_NUll = "args 의 id 값은 null을 허용하지 않습니다"
 
-    const val PRODUCT_ID_NOT_NULL = "args 의 product id 는 null을 허용하지 않습니다";
-
-    const val AUTHOR_NOT_NULL = "args의 author은 null 을 허용하지 않습니다"
+    const val ARGS_SEARCH_COMMAND_NOT_NULL = "ReviewSearchCommand is product_id and author is not null"
 }

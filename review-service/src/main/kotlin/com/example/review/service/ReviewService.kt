@@ -5,6 +5,7 @@ import com.example.review.app.exception.ExceptionMessage
 import com.example.review.domain.Review
 import com.example.review.domain.ReviewReader
 import com.example.review.domain.ReviewWriter
+import com.example.review.dto.ReviewSearchCommand
 import com.example.review.dto.ReviewWriteModel
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -15,15 +16,14 @@ interface ReviewService {
 
     fun getOne(id: Long?): Review
 
-    fun getByProductId(productId: Long?): Collection<Review>
-
-    fun getByAuthor(author: String?): Collection<Review>
+    fun getAllBy(command: ReviewSearchCommand): Collection<Review>
 }
 
 @Service
 @Transactional(readOnly = true)
 open class ReviewServiceImpl(
-    private val reviewWriter: ReviewWriter, private val reviewReader: ReviewReader
+    private val reviewWriter: ReviewWriter,
+    private val reviewReader: ReviewReader
 ) : ReviewService {
 
     @Transactional
@@ -41,18 +41,16 @@ open class ReviewServiceImpl(
             reviewReader.findOne(this)
         }
 
-    override fun getByProductId(productId: Long?): Collection<Review> =
-        checkNotNull(productId) {
-            ExceptionMessage.PRODUCT_ID_NOT_NULL
-        }.run {
-            reviewReader.findByProductId(this)
+    override fun getAllBy(command: ReviewSearchCommand): Collection<Review> {
+
+        check(!(command.productId == null && command.author == null)) {
+            ExceptionMessage.ARGS_SEARCH_COMMAND_NOT_NULL
         }
 
-    override fun getByAuthor(author: String?): Collection<Review> =
-        checkNotNull(author) {
-            ExceptionMessage.AUTHOR_NOT_NULL
-        }.run {
-            reviewReader.findByAuthor(this)
+        return if (command.productId != null) {
+            reviewReader.findByProductId(command.productId!!)
+        } else {
+            reviewReader.findByAuthor(command.author!!)
         }
-
+    }
 }

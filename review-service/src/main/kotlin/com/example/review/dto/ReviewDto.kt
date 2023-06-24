@@ -23,3 +23,9 @@ data class ReviewWriteRequest(
 
     fun toModel() = ReviewWriteModel(productId, author, content)
 }
+
+
+data class ReviewSearchCommand(
+    val productId: Long?,
+    val author: String?
+)

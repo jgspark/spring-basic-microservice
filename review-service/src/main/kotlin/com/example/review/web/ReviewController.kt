@@ -1,5 +1,6 @@
 package com.example.review.web
 
+import com.example.review.dto.ReviewSearchCommand
 import com.example.review.dto.ReviewWriteRequest
 import com.example.review.service.ReviewService
 import org.springframework.http.HttpStatus
@@ -23,11 +24,7 @@ class ReviewController(
     @GetMapping("review/{id}")
     fun showByOne(@PathVariable id: Long?) = reviewService.getOne(id)
 
-    // todo : 검색 조건 thinking
-    @GetMapping("reviews/product/{productId}")
-    fun showByProductId(@PathVariable productId: Long?) = reviewService.getByProductId(productId)
-
-    @GetMapping("reivews")
-    fun showByAuthor(author: String?) = reviewService.getByAuthor(author)
+    @GetMapping("reviews")
+    fun showByAuthor(command: ReviewSearchCommand) = reviewService.getAllBy(command)
 
 }
