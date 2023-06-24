@@ -1,5 +1,6 @@
 package com.example.review.domain
 
+import com.example.app.exception.NotFoundDataException
 import com.example.review.app.exception.ExceptionMessage
 import com.example.review.infra.ReviewRepository
 import jakarta.persistence.Column
@@ -56,7 +57,7 @@ data class Review(
     }
 
     @PreUpdate
-    fun preUpdate(){
+    fun preUpdate() {
         check(productId != 0L) {
             ExceptionMessage.REVIEW_SAVE_PRODUCT_ID
         }
@@ -70,4 +71,26 @@ open class ReviewWriter(
 
     @Transactional
     open fun write(entity: Review) = reviewRepository.save(entity)
+}
+
+
+@Component
+@Transactional(readOnly = true)
+open class ReviewReader(
+    private val reviewRepository: ReviewRepository
+) {
+
+    fun findOne(id: Long): Review = reviewRepository.findById(id)
+        .orElseThrow {
+            throw NotFoundDataException(
+                id,
+                ExceptionMessage.REVIEW_SELECT_NOT_FOUND
+            )
+        }
+
+    fun findByProductId(productId: Long): Collection<Review> =
+        reviewRepository.findByProductId(productId)
+
+    fun findByAuthor(author: String) =
+        reviewRepository.findByAuthor(author)
 }
