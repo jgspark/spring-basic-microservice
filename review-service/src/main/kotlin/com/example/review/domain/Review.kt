@@ -75,12 +75,12 @@ open class ReviewWriter(
 
 
 @Component
-@Transactional(readOnly = true)
 open class ReviewReader(
     private val reviewRepository: ReviewRepository
 ) {
 
-    fun findOne(id: Long): Review = reviewRepository.findById(id)
+    @Transactional(readOnly = true)
+    open fun findOne(id: Long): Review = reviewRepository.findById(id)
         .orElseThrow {
             throw NotFoundDataException(
                 id,
@@ -88,9 +88,11 @@ open class ReviewReader(
             )
         }
 
-    fun findByProductId(productId: Long): Collection<Review> =
+    @Transactional(readOnly = true)
+    open fun findByProductId(productId: Long): Collection<Review> =
         reviewRepository.findByProductId(productId)
 
-    fun findByAuthor(author: String) =
+    @Transactional(readOnly = true)
+    open fun findByAuthor(author: String) =
         reviewRepository.findByAuthor(author)
 }
