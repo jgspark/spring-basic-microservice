@@ -58,4 +58,58 @@ open class ReviewReaderTest {
         //then
         assertEquals(e.message, ExceptionMessage.REVIEW_SELECT_NOT_FOUND)
     }
+
+    @Test
+    @Transactional
+    @Throws(Exception::class)
+    open fun `주문 아이디별 리뷰 조회`() {
+
+        //given
+        val reviews = mutableListOf(
+            Review(0L, 1L, "리뷰인플런서", "상품을 사용을 했지만, 나쁘지 않았습니다", null, null),
+            Review(0L, 1L, "리뷰인플런서", "상품을 사용을 했지만, 나쁘지 않았습니다", null, null),
+            Review(0L, 1L, "리뷰인플런서", "상품을 사용을 했지만, 나쁘지 않았습니다", null, null),
+            Review(0L, 1L, "리뷰인플런서", "상품을 사용을 했지만, 나쁘지 않았습니다", null, null),
+            Review(0L, 1L, "리뷰인플런서", "상품을 사용을 했지만, 나쁘지 않았습니다", null, null),
+            Review(0L, 1L, "리뷰인플런서", "상품을 사용을 했지만, 나쁘지 않았습니다", null, null),
+            Review(0L, 1L, "리뷰인플런서", "상품을 사용을 했지만, 나쁘지 않았습니다", null, null),
+            Review(0L, 1L, "리뷰인플런서", "상품을 사용을 했지만, 나쁘지 않았습니다", null, null),
+            Review(0L, 1L, "리뷰인플런서", "상품을 사용을 했지만, 나쁘지 않았습니다", null, null),
+            Review(0L, 1L, "리뷰인플런서", "상품을 사용을 했지만, 나쁘지 않았습니다", null, null),
+            Review(0L, 1L, "리뷰인플런서", "상품을 사용을 했지만, 나쁘지 않았습니다", null, null),
+            Review(0L, 1L, "리뷰인플런서", "상품을 사용을 했지만, 나쁘지 않았습니다", null, null)
+        )
+
+        reviewRepository.saveAll(reviews)
+
+        val findProductId = 1L
+
+        //when
+
+        val entities = reviewReader.findByProductId(findProductId)
+
+        //then
+
+        assertArrayEquals(reviews.toTypedArray(), entities.toTypedArray())
+        assertEquals(reviews.size, entities.size)
+    }
+
+    @Test
+    @Transactional
+    @Throws(Exception::class)
+    open fun `상품에 대한 리뷰뷰조회시 빈값이 반환이 되는가?`() {
+
+        //given
+
+        val findProductId = 1L
+
+        //when
+
+        val entities = reviewReader.findByProductId(findProductId)
+
+        //then
+
+        assertTrue(entities.isEmpty())
+    }
+
 }
