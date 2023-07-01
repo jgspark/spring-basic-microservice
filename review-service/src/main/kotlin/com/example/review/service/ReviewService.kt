@@ -53,8 +53,12 @@ open class ReviewServiceImpl(
             ExceptionMessage.ARGS_SEARCH_COMMAND_NOT_NULL
         }
 
+        check(!(command.productId != null && command.author != null)) {
+            ExceptionMessage.ARGS_SEARCH_COMMAND_NOT_NULL
+        }
+
         return if (command.productId != null) {
-            reviewReader.findByProductId(command.productId!!)
+            reviewReader.findByProductId(command.productId)
         } else {
             reviewReader.findByAuthor(command.author!!)
         }
