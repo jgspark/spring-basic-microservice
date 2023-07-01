@@ -112,4 +112,58 @@ open class ReviewReaderTest {
         assertTrue(entities.isEmpty())
     }
 
+    @Test
+    @Transactional
+    @Throws(Exception::class)
+    open fun `리뷰자별 리뷰 조회`() {
+
+        //given
+        val reviews = mutableListOf(
+            Review(0L, 1L, "리뷰인플런서", "상품을 사용을 했지만, 나쁘지 않았습니다", null, null),
+            Review(0L, 1L, "리뷰인플런서", "상품을 사용을 했지만, 나쁘지 않았습니다", null, null),
+            Review(0L, 1L, "리뷰인플런서", "상품을 사용을 했지만, 나쁘지 않았습니다", null, null),
+            Review(0L, 1L, "리뷰인플런서", "상품을 사용을 했지만, 나쁘지 않았습니다", null, null),
+            Review(0L, 1L, "리뷰인플런서", "상품을 사용을 했지만, 나쁘지 않았습니다", null, null),
+            Review(0L, 1L, "리뷰인플런서", "상품을 사용을 했지만, 나쁘지 않았습니다", null, null),
+            Review(0L, 1L, "리뷰인플런서", "상품을 사용을 했지만, 나쁘지 않았습니다", null, null),
+            Review(0L, 1L, "리뷰인플런서", "상품을 사용을 했지만, 나쁘지 않았습니다", null, null),
+            Review(0L, 1L, "리뷰인플런서", "상품을 사용을 했지만, 나쁘지 않았습니다", null, null),
+            Review(0L, 1L, "리뷰인플런서", "상품을 사용을 했지만, 나쁘지 않았습니다", null, null),
+            Review(0L, 1L, "리뷰인플런서", "상품을 사용을 했지만, 나쁘지 않았습니다", null, null),
+            Review(0L, 1L, "리뷰인플런서", "상품을 사용을 했지만, 나쁘지 않았습니다", null, null)
+        )
+
+        reviewRepository.saveAll(reviews)
+
+        val findAuthor = "리뷰인플런서"
+
+        //when
+
+        val entities = reviewReader.findByAuthor(findAuthor)
+
+        //then
+
+        assertArrayEquals(reviews.toTypedArray(), entities.toTypedArray())
+        assertEquals(reviews.size, entities.size)
+    }
+
+    @Test
+    @Transactional
+    @Throws(Exception::class)
+    open fun `리뷰자에 대한 리뷰뷰조회시 빈값이 반환이 되는가?`() {
+
+        //given
+
+        val findAuthor = "리뷰인플런서"
+
+
+        //when
+
+        val entities = reviewReader.findByAuthor(findAuthor)
+
+        //then
+
+        assertTrue(entities.isEmpty())
+    }
+
 }
