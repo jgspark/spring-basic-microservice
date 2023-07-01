@@ -8,13 +8,16 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
+import org.mockito.InjectMocks
 import org.mockito.Mock
+import org.mockito.MockitoAnnotations
 import org.mockito.junit.jupiter.MockitoExtension
 
 @ExtendWith(MockitoExtension::class)
 class ReviewServiceTest {
 
-    lateinit var reviewService: ReviewService
+    @InjectMocks
+    lateinit var reviewService: ReviewServiceImpl
 
     @Mock
     lateinit var reviewWriter: ReviewWriter
@@ -24,7 +27,7 @@ class ReviewServiceTest {
 
     @BeforeEach
     fun init() {
-        reviewService = ReviewServiceImpl(reviewWriter, reviewReader)
+        MockitoAnnotations.openMocks(this)
     }
 
     @Test
