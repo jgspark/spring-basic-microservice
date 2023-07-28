@@ -30,12 +30,8 @@ open class ReviewServiceImpl(
 ) : ReviewService {
 
     @Transactional
-    override fun writeOne(model: ReviewWriteModel): Long = reviewWriter.write(model.toEntity()).id.run {
-        check(this == 0L) {
-            throw NotFoundDataException(ExceptionMessage.REVIEW_NOT_SAVE)
-        }
-        this
-    }
+    override fun writeOne(model: ReviewWriteModel): Long = reviewWriter.write(model.toEntity()).id
+        ?: throw NotFoundDataException(ExceptionMessage.REVIEW_NOT_SAVE)
 
     @Transactional
     override fun mergeOne(model: ReviewMergeModel): Review = reviewWriter.update(model.toEntity())

@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     java
-    id("org.springframework.boot") version ("3.0.3")
+    id("org.springframework.boot") version ("3.1.2")
     id("io.spring.dependency-management") version ("1.1.0")
     id("org.jetbrains.kotlin.jvm") version ("1.7.22")
     id("org.jetbrains.kotlin.plugin.spring") version ("1.7.22")
@@ -62,16 +62,26 @@ subprojects {
             implementation("org.springframework.boot:spring-boot-starter-web")
         }
 
-        // jps
-        implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+        if (!project.name.contains("product-composite") && !project.name.contains("util")) {
 
-        // mysql
-        runtimeOnly("com.mysql:mysql-connector-j")
-        testImplementation("com.h2database:h2")
+            // jpa
+            implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
-        // log add
-        // todo : 나중에 체크
-        testImplementation("com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.9.0")
+            // log add
+            // todo : 나중에 체크
+            testImplementation("com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.9.0")
+
+            // mysql
+            runtimeOnly("com.mysql:mysql-connector-j")
+            testImplementation("com.h2database:h2")
+        }
+
+        if (project.name.contains("product-composite")) {
+
+            // webclient add
+            implementation("org.springframework.boot:spring-boot-starter-webflux")
+
+        }
 
 
         // todo : 나중에 추가 예정

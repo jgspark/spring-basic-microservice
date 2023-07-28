@@ -10,10 +10,11 @@ import org.springframework.web.bind.annotation.RestControllerAdvice
  * 어플리케이션내의 글로벌 핸들러
  */
 
+private val logger = LoggerFactory.getLogger(GlobalExceptionHandler::class.java)
+
 @RestControllerAdvice
 class GlobalExceptionHandler {
 
-    private val logger = LoggerFactory.getLogger(this::class.java)
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception::class)

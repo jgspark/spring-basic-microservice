@@ -21,7 +21,7 @@ data class Review(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "review_id")
-    val id: Long,
+    var id: Long?,
     @Column(nullable = false)
     val productId: Long,
     @Column(nullable = false)
@@ -74,7 +74,7 @@ open class ReviewWriter(
 
     @Transactional
     open fun update(entity: Review): Review =
-        reviewRepository.findById(entity.id)
+        reviewRepository.findById(entity.id!!)
             .orElseThrow {
                 throw NotFoundDataException(entity.id, ExceptionMessage.REVIEW_SELECT_NOT_FOUND)
             }.run {

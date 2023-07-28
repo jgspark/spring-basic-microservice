@@ -1,5 +1,6 @@
 package com.example.review.web
 
+import com.example.review.domain.Review
 import com.example.review.dto.ReviewMergeRequest
 import com.example.review.dto.ReviewSearchCommand
 import com.example.review.dto.ReviewWriteRequest
@@ -28,7 +29,7 @@ class ReviewController(
         reviewService.mergeOne(request.toModel(id))
 
     @GetMapping("review/{id}")
-    fun showByOne(@PathVariable id: Long?) = reviewService.getOne(id)
+    fun showByOne(@PathVariable id: Long?): Review = reviewService.getOne(id)
 
     @GetMapping("reviews")
     fun showByAuthor(command: ReviewSearchCommand) = reviewService.getAllBy(command)
