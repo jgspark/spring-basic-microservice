@@ -31,7 +31,7 @@ open class ReviewReaderTest {
         reviewRepository.save(review)
 
         //when
-        val entity = reviewReader.findOne(review.id)
+        val entity = reviewReader.findOne(review.id!!)
 
         //then
         assertEquals(review, entity)
