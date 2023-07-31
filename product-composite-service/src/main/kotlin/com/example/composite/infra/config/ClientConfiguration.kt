@@ -9,11 +9,13 @@ import org.springframework.web.service.invoker.HttpServiceProxyFactory
 
 
 @Configuration
-open class ClientConfiguration {
+open class ClientConfiguration(
+    private val clientProperties: ClientProperties
+) {
 
     @Bean
     open fun reviewClient(): ReviewClient = WebClient.builder()
-        .baseUrl("http://localhost:7003")
+        .baseUrl(clientProperties.review.baseUrl)
         .build()
         .let {
 

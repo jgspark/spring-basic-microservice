@@ -1,0 +1,4 @@
+# Client
+client:
+  review:
+    baseurl: http://localhost:7003
