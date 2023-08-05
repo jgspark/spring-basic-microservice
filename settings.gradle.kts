@@ -7,5 +7,5 @@ include(
     "review-service",
     "recommendation-service",
     "product-composite-service",
-    "util"
+    "core"
 )
