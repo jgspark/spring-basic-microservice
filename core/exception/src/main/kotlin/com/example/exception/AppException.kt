@@ -1,4 +1,4 @@
-package com.example.app.exception
+package com.example.exception
 
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus

@@ -62,7 +62,7 @@ subprojects {
             implementation("org.springframework.boot:spring-boot-starter-web")
         }
 
-        if (!project.name.contains("product-composite") && !project.name.contains("util")) {
+        if (!project.name.contains("product-composite") && !project.name.contains("core")) {
 
             // jpa
             implementation("org.springframework.boot:spring-boot-starter-data-jpa")

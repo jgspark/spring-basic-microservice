@@ -11,5 +11,5 @@ tasks.bootJar {
 }
 
 dependencies {
-    implementation(project(":core"))
+    implementation(project(":core:exception"))
 }
