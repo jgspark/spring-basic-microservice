@@ -1,6 +1,6 @@
 package com.example.review.service
 
-import com.example.app.exception.NotFoundDataException
+import com.example.exception.NotFoundDataException
 import com.example.review.app.exception.ExceptionMessage
 import com.example.review.domain.Review
 import com.example.review.domain.ReviewReader

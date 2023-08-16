@@ -3,9 +3,9 @@ rootProject.name = "spring-basic-microservice"
 
 include(
     "api-gateway",
-    "product-service",
-    "review-service",
-    "recommendation-service",
-    "product-composite-service",
+    ":service:product-service",
+    ":service:review-service",
+    ":service:recommendation-service",
+    ":service:product-composite-service",
     ":core:exception"
 )

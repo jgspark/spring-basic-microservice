@@ -1,6 +1,6 @@
 package com.example.review.domain
 
-import com.example.app.exception.NotFoundDataException
+import com.example.exception.NotFoundDataException
 import com.example.review.app.exception.ExceptionMessage
 import com.example.review.infra.ReviewRepository
 import jakarta.persistence.Column
