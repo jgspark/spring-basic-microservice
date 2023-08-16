@@ -3,16 +3,13 @@ plugins {
 }
 
 tasks.jar {
-    enabled = false
+    enabled = true
 }
 
 tasks.bootJar {
-    enabled = true
+    enabled = false
 }
 
 dependencies {
     implementation(project(":core:exception"))
-    implementation(project(":core:http")) {
-        exclude(module = ":core:exception")
-    }
 }

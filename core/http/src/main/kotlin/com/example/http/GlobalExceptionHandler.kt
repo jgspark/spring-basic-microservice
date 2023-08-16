@@ -1,5 +1,6 @@
-package com.example.exception
+package com.example.http
 
+import com.example.exception.NotFoundDataException
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.ExceptionHandler
@@ -19,7 +20,7 @@ class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception::class)
     fun handler(e: Exception) =
-        AppExceptionMessage(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.message)
+        GlobalExceptionMessage(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.message)
             .run {
                 logger.error(e.message, e)
                 this
@@ -27,8 +28,8 @@ class GlobalExceptionHandler {
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @ExceptionHandler(NotFoundDataException::class)
-    fun handler(e: NotFoundDataException): AppExceptionMessage =
-        AppExceptionMessage(HttpStatus.NO_CONTENT.value(), e.message)
+    fun handler(e: NotFoundDataException): GlobalExceptionMessage =
+        GlobalExceptionMessage(HttpStatus.NO_CONTENT.value(), e.message)
             .run {
                 logger.warn("Not Found Data : {}", e.data)
                 this
@@ -41,7 +42,7 @@ class GlobalExceptionHandler {
         ]
     )
     fun handler(e: IllegalStateException) =
-        AppExceptionMessage(HttpStatus.BAD_REQUEST.value(), e.message)
+        GlobalExceptionMessage(HttpStatus.BAD_REQUEST.value(), e.message)
             .run {
                 logger.error(e.message, e)
                 this
@@ -49,16 +50,3 @@ class GlobalExceptionHandler {
 
 }
 
-data class AppExceptionMessage(
-    val code: Int, val message: String?
-)
-
-class NotFoundDataException(
-    val data: Any?,
-    override val message: String?,
-) : RuntimeException(message) {
-
-    constructor() : this(null, null)
-
-    constructor(message: String?) : this(null, message)
-}

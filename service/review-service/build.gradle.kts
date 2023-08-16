@@ -12,4 +12,7 @@ tasks.bootJar {
 
 dependencies {
     implementation(project(":core:exception"))
+    implementation(project(":core:http")) {
+        exclude(module = ":core:exception")
+    }
 }

@@ -7,5 +7,6 @@ include(
     ":service:review-service",
     ":service:recommendation-service",
     ":service:product-composite-service",
-    ":core:exception"
+    ":core:exception",
+    ":core:http"
 )
